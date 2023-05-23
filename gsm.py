@@ -1,5 +1,22 @@
 import numpy as np
 
+import utils
+
+square_sail_vectors_cache: utils.VecsCache | None = None
+def get_cached_square_sail_vectors( 
+        boom_half_length: float, 
+        billow: float, 
+        tip_displacement: float,  
+        n_panels: int, 
+        full: bool=False):
+    if square_sail_vectors_cache is not None and square_sail_vectors_cache.is_hit(
+        boom_half_length=boom_half_length, billow=billow,
+        tip_displacement=tip_displacement, n_panels=n_panels, full=full
+    ):
+        return square_sail_vectors_cache.cached_value
+    else:
+        return None
+
 def get_square_sail_vectors(
         boom_half_length: float, 
         billow: float, 
